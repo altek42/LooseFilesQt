@@ -25,12 +25,21 @@ SOFTWARE.
 #ifndef SINGLETONE_MACRO_H
 #define SINGLETONE_MACRO_H
 
+#include <QQmlApplicationEngine>
+
 /* file.h */
 #define SINGLETONE_INIT_H(CLASS) \
     public: \
         static CLASS *getInstance(); \
     private: \
         static CLASS *_instance;
+
+#define SINGLETONE_QML_H(CLASS) \
+    Q_DISABLE_COPY(CLASS) \
+public: \
+    void registerQml(const char* uri,const int verMajor, const int verMinor); \
+private: \
+    static QObject *getQmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 
 /* file.cpp */
@@ -43,12 +52,16 @@ SOFTWARE.
         return _instance; \
     }
 
-
-
-
-
-
-
+#define SINGLETONE_QML_CPP(CLASS) \
+QObject *CLASS::getQmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine) \
+{ \
+    Q_UNUSED(engine); \
+    Q_UNUSED(scriptEngine); \
+    return static_cast<QObject*>(CLASS::getInstance()); \
+}\
+void CLASS::registerQml(const char* uri,const int verMajor, const int verMinor){\
+    qmlRegisterSingletonType<CLASS>(uri,verMajor,verMinor,#CLASS,&getQmlInstance);\
+}
 
 
 #endif // SINGLETONE_MACRO_H

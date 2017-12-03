@@ -31,6 +31,7 @@ SOFTWARE.
 /* file.h */
 #define SETTING_INIT_H(CLASS) \
     SINGLETONE_INIT_H(CLASS) \
+    SINGLETONE_QML_H(CLASS) \
 private: \
     QSettings* _settings; \
     void __init();
@@ -46,6 +47,7 @@ private: \
 /* file.cpp */
 #define SETTING_INIT_CPP(CLASS, FILE_NAME, GROUP_NAME) \
     SINGLETONE_INIT_CPP(CLASS) \
+    SINGLETONE_QML_CPP(CLASS) \
     void CLASS::__init(){\
     this->_settings = new QSettings(FILE_NAME,QSettings::IniFormat); \
     this->_settings->beginGroup(GROUP_NAME);\
