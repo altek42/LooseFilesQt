@@ -1,11 +1,7 @@
-/**
+﻿/**
 MIT License
 
-<<<<<<< HEAD:MACRO/setting.h
 Copyright (c) 2017 Przemysław Gawlas
-=======
-Copyright (c) 2017 Przemyslaw Gawlas
->>>>>>> 93157337844e99f9e043696df33c13b0c87a17d8:settingmacro.h
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
